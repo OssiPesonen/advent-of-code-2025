@@ -16,5 +16,5 @@ tasks:
       DAY: '{{index .MATCH 0}}'
       PART: '{{index .MATCH 1}}'
     cmds:
-      - dotnet run day{{.DAY}}/part{{.PART}}/app.cs
+      - dotnet run -- --puzzle day{{.DAY}}part{{.PART}}
     silent: true

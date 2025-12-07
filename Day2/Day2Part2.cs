@@ -1,9 +1,9 @@
 ﻿namespace AdventOfCode2025.Day2;
 
-public class Day2Part1 : IPuzzle
+public class Day2Part2 : IPuzzle
 {
     private static IEnumerable<string> Lines => File.ReadLines("input.txt");
-    
+
     public Task RunAsync()
     {
         var productIds = Lines.First().Split(',');
@@ -22,18 +22,24 @@ public class Day2Part1 : IPuzzle
                 }
             }
         }
-        
+
         Console.WriteLine("Answer is " + invalidIds.Sum());
         return Task.CompletedTask;
     }
-    
+
     private static bool HasRepeatedNumberSequence(string input)
     {
-        if (input.Length % 2 != 0)
-            return false;
-        
-        var len = input.Length / 2;
-        var seq = input[..len];
-        return (seq + seq) == input;
+        for (var len = 1; len <= input.Length / 2; len++)
+        {
+            var seq = input[..len];
+            if (input.Length % len != 0)
+                continue;
+
+            var repeated = string.Concat(Enumerable.Repeat(seq, input.Length / len));
+            if (repeated == input)
+                return true;
+        }
+
+        return false;
     }
 }

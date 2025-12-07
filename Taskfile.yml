@@ -1,0 +1,20 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+  
+  run:*:*:
+    vars:
+      DAY: '{{index .MATCH 0}}'
+      PART: '{{index .MATCH 1}}'
+    cmds:
+      - dotnet run day{{.DAY}}/part{{.PART}}/app.cs
+    silent: true

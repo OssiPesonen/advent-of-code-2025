@@ -1,10 +1,10 @@
 ﻿namespace AdventOfCode2025.Day1;
 
-public class Day1Part2 : Puzzle
+public class Day1Part2 : IPuzzle
 {
     private static IEnumerable<string> Lines => File.ReadLines("input.txt");
 
-    public override Task RunAsync()
+    public Task RunAsync()
     { 
         const int startingPoint = 50;
 

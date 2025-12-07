@@ -1,10 +1,10 @@
 ﻿namespace AdventOfCode2025.Day1;
 
-public class Day1Part1 : Puzzle
+public class Day1Part1 : IPuzzle
 {
     private static IEnumerable<string> Lines => File.ReadLines("input.txt");
     
-    public override Task RunAsync()
+    public Task RunAsync()
     {
         var numberOfTimesPastZero = 0;
         var positionOnDial = 50;

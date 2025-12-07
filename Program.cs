@@ -16,8 +16,8 @@ class Program
 
         var puzzles = Assembly.GetExecutingAssembly()
             .GetTypes()
-            .Where(t => !t.IsAbstract && typeof(Puzzle).IsAssignableFrom(t))
-            .Select(t => (Puzzle)Activator.CreateInstance(t)!)
+            .Where(t => !t.IsAbstract && typeof(IPuzzle).IsAssignableFrom(t))
+            .Select(t => (IPuzzle)Activator.CreateInstance(t)!)
             .ToList();
 
         var puzzle = puzzles.FirstOrDefault(p => p.GetType().ToString().Split('.').Last().Equals(puzzleName, StringComparison.CurrentCultureIgnoreCase));

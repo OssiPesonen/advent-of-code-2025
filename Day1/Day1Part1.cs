@@ -2,41 +2,26 @@
 
 public class Day1Part1 : Puzzle
 {
+    private static IEnumerable<string> Lines => File.ReadLines("input.txt");
+    
     public override Task RunAsync()
     {
-        const string input = "input.txt";
-        if (!File.Exists(input))
-            throw new Exception(
-                $"Input file was not found at project root. Please create input.txt and add your puzzle input there.");
-        var lines = File.ReadLines(input);
-
-        const int right = 1;
-        const int left = -1;
-        const int startingPoint = 50;
-
         var numberOfTimesPastZero = 0;
-        var positionOnDial = startingPoint;
+        var positionOnDial = 50;
 
-        foreach (var line in lines)
+        foreach (var line in Lines)
         {
-            var dir = line.Substring(0, 1);
-            var steps = Int64.Parse(line.Remove(0, 1));
-            for (var i = 0; i < steps; i++)
-            {
-                positionOnDial += dir == "L" ? left : right;
-                positionOnDial = positionOnDial switch
-                {
-                    -1 => 99,
-                    100 => 0,
-                    _ => positionOnDial
-                };
-            }
+            var dir = line[0] == 'L' ? -1 : 1;
+            var distance = int.Parse(line[1..]);
 
+            positionOnDial += dir * distance;
+            positionOnDial %= 100;
+            
             if (positionOnDial == 0) numberOfTimesPastZero++;
         }
 
         Console.WriteLine("Answer is " + numberOfTimesPastZero + "");
-
         return Task.CompletedTask;
     }
+    
 }
